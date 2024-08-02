@@ -1,10 +1,12 @@
 package com.ctw.workstation.unit;
 
+import com.ctw.workstation.CommonProfile;
 import com.ctw.workstation.team.boundary.TeamResource;
 import com.ctw.workstation.team.control.TeamRepository;
 import com.ctw.workstation.team.entity.Team;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @QuarkusTest
+@TestProfile(CommonProfile.class)
 public class TeamServiceTest {
 
     // Inject a mock for the real object

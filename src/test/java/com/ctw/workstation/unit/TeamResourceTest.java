@@ -1,10 +1,12 @@
 package com.ctw.workstation.unit;
 
+import com.ctw.workstation.CommonProfile;
 import com.ctw.workstation.team.boundary.TeamResource;
 import com.ctw.workstation.team.control.TeamService;
 import com.ctw.workstation.team.entity.TeamDTO;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.*;
@@ -17,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @QuarkusTest
+@TestProfile(CommonProfile.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TeamResourceTest {
 
@@ -34,6 +37,7 @@ public class TeamResourceTest {
     void setUp() {
         team = new TeamDTO();
         team.setName("Team A");
+
 
         when(teamService.getById(anyLong())).thenAnswer(inv -> {
             Long inputId = inv.getArgument(0);

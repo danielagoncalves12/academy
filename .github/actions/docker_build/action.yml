@@ -25,6 +25,8 @@ runs:
         fi
         
         echo "NAME=${{ inputs.image_name }}" >> $GITHUB_ENV
+        
+        echo "DOCKER_IMAGE_NAME=$NAME:$TAG"
 
     - name: Create docker image
       shell: bash

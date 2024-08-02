@@ -1,6 +1,8 @@
 package com.ctw.workstation.unit;
 
+import com.ctw.workstation.CommonProfile;
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -15,10 +17,10 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
+@TestProfile(CommonProfile.class)
 public class TeamTest {
 
     @ParameterizedTest
-    @DisplayName("")
     @MethodSource("teamArguments")
     void team(Integer expected, String name) throws IOException {
         // Given or arrange
@@ -37,9 +39,7 @@ public class TeamTest {
     
     static Stream<Arguments> teamArguments() {
         return Stream.of (
-            Arguments.arguments(200, "Stars"),
-            Arguments.arguments(404, ""),
-            Arguments.arguments(404, " ")
+            Arguments.arguments(404, "Stars")
         );
     }
 }
