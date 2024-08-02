@@ -1,0 +1,7 @@
+### GET request to get all teams
+GET localhost:8080/workstation/teams
+Content-Type: */*
+
+### GET request to get team by id
+GET localhost:8080/workstation/teams?name=" "
+Content-Type: */*

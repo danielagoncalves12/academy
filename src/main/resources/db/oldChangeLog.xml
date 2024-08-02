@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="danielagoncalves">
+
+        <!-- Team table -->
+        <createTable tableName="T_TEAM">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="default_location" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!-- Team member -->
+        <createTable tableName="T_TEAM_MEMBER">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="team_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ctw_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="T_TEAM_MEMBER" baseColumnNames="team_id"
+                                 referencedTableName="T_TEAM" referencedColumnNames="id"
+                                 constraintName="t_team_member_team_id_fkey"/>
+
+        <!-- Rack table -->
+        <createTable tableName="T_RACK">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="serial_number" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="team_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="default_location" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="T_RACK" baseColumnNames="team_id"
+                                 referencedTableName="T_TEAM" referencedColumnNames="id"
+                                 constraintName="t_rack_team_id_fkey"/>
+
+        <!-- Rack table -->
+        <createTable tableName="T_RACK_ASSET">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="asset_tag" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rack_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="T_RACK_ASSET" baseColumnNames="rack_id"
+                                 referencedTableName="T_RACK" referencedColumnNames="id"
+                                 constraintName="t_rack_asset_rack_id_fkey"/>
+
+        <!-- Booking table -->
+        <createTable tableName="T_BOOKING">
+            <column name="rack_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="requester_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_from" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_to" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="T_BOOKING" baseColumnNames="rack_id"
+                                 referencedTableName="T_RACK" referencedColumnNames="id"
+                                 constraintName="t_booking_rack_id_fkey"/>
+
+        <addForeignKeyConstraint baseTableName="T_BOOKING" baseColumnNames="requester_id"
+                                 referencedTableName="T_TEAM_MEMBER" referencedColumnNames="id"
+                                 constraintName="t_booking_requester_id_fkey"/>
+    </changeSet>
+</databaseChangeLog>
