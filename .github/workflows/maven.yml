@@ -27,8 +27,9 @@ jobs:
         dockerfile_path: src/main/docker/Dockerfile.jvm
     - name: List docker images
       run: docker images
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
+    - name: Push the docker image
+      uses: danielagoncalves12/academy/.github/actions/push_build@main
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        docker_username: ${{ secrets.DOCKERHUB_USERNAME }}
+        docker_token: ${{ secrets.DOCKERHUB_TOKEN }}
+        image_name: ${{ env.DOCKER_IMAGE_NAME }}
