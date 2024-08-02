@@ -25,5 +25,7 @@ jobs:
       uses: danielagoncalves12/academy/.github/actions/docker_build@main
       with:
         dockerfile_path: src/main/docker/Dockerfile.jvm
+        image_name: academy
+        tag_name: 123
     - name: List docker images
       run: docker images

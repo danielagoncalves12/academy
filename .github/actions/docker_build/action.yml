@@ -5,8 +5,16 @@ inputs:
     description: "Path to the Dockerfile"
     required: false
     default: "Dockerfile"
+  image_name:
+    description: "Image name"
+    required: false
+    default: "academy"
+  tag_name:
+    description: "Tag name"
+    required: false
+    default: $(date +%s)
 runs:
   using: composite
   steps:
-    - run: docker build . --file ${{ inputs.dockerfile_path }} --tag academy:$(date +%s)
+    - run: docker build . --file ${{ inputs.dockerfile_path }} --tag ${{ inputs.image_name }}:${{ inputs.tag_name }}
       shell: bash
