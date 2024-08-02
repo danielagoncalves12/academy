@@ -21,4 +21,4 @@ runs:
     - name: Tag the image
       shell: bash
       run: |
-        docker tag ${{ inputs.image_name }} ${{ input.docker_username }}/${{ inputs.image_name }}
+        docker tag ${{ inputs.image_name }} ${{ inputs.docker_username }}/${{ inputs.image_name }}
