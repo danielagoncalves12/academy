@@ -19,14 +19,15 @@ runs:
       shell: bash
       run: |
         if [ -z "${{ inputs.tag_name }}" ]; then
-          echo "TAG=$(date +%s)" >> $GITHUB_ENV
+          TAG=$(date +%s) >> $GITHUB_ENV
         else
-          echo "TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
+          TAG=${{ inputs.tag_name }} >> $GITHUB_ENV
         fi
         
-        echo "NAME=${{ inputs.image_name }}" >> $GITHUB_ENV
+        PATH=${{ inputs.dockerfile_path }}
+        NAME=${{ inputs.image_name }} >> $GITHUB_ENV
 
     - name: Create docker image
       shell: bash
       run: |
-        docker build . --file ${{ inputs.dockerfile_path }} --tag $NAME:$TAG
+        docker build . --file $PATH --tag $NAME:$TAG
