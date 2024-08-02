@@ -20,6 +20,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      uses: danielagoncalves12/academy/.github/actions/maven_build@main
       run: mvn -B package -DskipTests=true --file pom.xml
     - name: Build the docker file
       run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
