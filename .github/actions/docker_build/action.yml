@@ -12,7 +12,6 @@ inputs:
   tag_name:
     description: "Tag name"
     required: false
-    default: $(date +%s)
 runs:
   using: composite
   steps:
@@ -25,7 +24,8 @@ runs:
         echo "TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
         fi
         
+        echo "NAME=${{ inputs.image_name }}:$TAG >> $GITHUB_ENV
         echo "DOCKER_IMAGE_NAME=$NAME" >> $GITHUB_ENV
     - name: Create docker image
       shell: bash
-      run: docker build . --file ${{ inputs.dockerfile_path }} --tag $DOCKER_IMAGE_NAME:$TAG
+      run: docker build . --file ${{ inputs.dockerfile_path }} --tag $DOCKER_IMAGE_NAME
