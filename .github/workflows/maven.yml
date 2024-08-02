@@ -22,6 +22,8 @@ jobs:
     - name: Build with Maven
       uses: danielagoncalves12/academy/.github/actions/maven_build@main
     - name: Build the docker file
-      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+      uses: danielagoncalves12/academy/.github/actions/docker_build@main
+      with:
+        dockerfile_path: src/main/docker/Dockerfile.jvm
     - name: List docker images
       run: docker images
