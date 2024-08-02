@@ -22,3 +22,4 @@ runs:
       shell: bash
       run: |
         docker tag ${{ inputs.image_name }} ${{ inputs.docker_username }}/${{ inputs.image_name }}
+        docker push ${{ inputs.docker_username }}/${{ inputs.image_name }}
